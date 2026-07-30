@@ -1,0 +1,880 @@
+/* ==========================================================================
+   Birthday Surprise Website - Main Stylesheet (style.css)
+   ========================================================================== */
+
+:root {
+  --bg-color: #faf6f0;
+  --primary-color: #ff6b8b;
+  --primary-hover: #ff4770;
+  --text-dark: #2d3436;
+  --text-muted: #636e72;
+  --card-bg: #ffffff;
+  --line-color: #f8c8dc;
+  --accent-color: #ffd166;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Floating Music Player
+   -------------------------------------------------------------------------- */
+.audio-player {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.audio-player button {
+  background-color: #ffffff;
+  color: var(--text-dark);
+  border: 2px solid var(--primary-color);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.audio-player button:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.audio-player button.playing {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Password Lock Screen Overlay
+   -------------------------------------------------------------------------- */
+.lock-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
+  transition: opacity 0.4s ease;
+}
+
+.lock-card {
+  background: var(--card-bg);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+.lock-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.lock-card h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 2.8rem;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.lock-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.hint-question {
+  background-color: #fff0f3;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-weight: 500;
+  color: #d63384;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.lock-card input {
+  width: 100%;
+  padding: 12px 18px;
+  border: 2px solid #eee;
+  border-radius: 25px;
+  outline: none;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.lock-card input:focus {
+  border-color: var(--primary-color);
+}
+
+.lock-card button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 107, 139, 0.4);
+}
+
+.lock-card button:hover {
+  background-color: var(--primary-hover);
+}
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 12px;
+  min-height: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Main Content Layout
+   -------------------------------------------------------------------------- */
+.main-content {
+  display: none; /* Revealed via JS after password entry */
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Header */
+header {
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff5f7 0%, #ffe3e8 100%);
+}
+
+.badge {
+  background-color: #fff;
+  color: var(--primary-color);
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+header h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 4.5rem;
+  color: var(--primary-color);
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+header p {
+  font-size: 1.1rem;
+  max-width: 550px;
+  color: var(--text-muted);
+}
+
+.scroll-hint {
+  margin-top: 45px;
+  font-size: 0.9rem;
+  color: #888;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Timeline
+   -------------------------------------------------------------------------- */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 90px auto;
+  padding: 0 20px;
+}
+
+/* Central vertical line */
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: var(--line-color);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+  border-radius: 2px;
+}
+
+.timeline-card {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  margin-bottom: 70px;
+}
+
+.timeline-card.left { left: 0; text-align: right; }
+.timeline-card.right { left: 50%; text-align: left; }
+
+/* Timeline Marker Pins */
+.timeline-card::after {
+  content: '💖';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: -16px;
+  background-color: var(--bg-color);
+  top: 20px;
+  border-radius: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.timeline-card.right::after { left: -16px; }
+
+.date-tag {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Polaroid 3D Flip Effect */
+.polaroid-card {
+  background-color: var(--card-bg);
+  padding: 15px 15px 22px 15px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-card:hover {
+  transform: translateY(-6px);
+}
+
+.polaroid-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.polaroid-card.flipped .polaroid-inner {
+  transform: rotateY(180deg);
+}
+
+.polaroid-front, .polaroid-back {
+  backface-visibility: hidden;
+}
+
+.polaroid-front img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.polaroid-front .caption {
+  font-family: 'Caveat', cursive;
+  font-size: 1.7rem;
+  margin-top: 12px;
+  color: var(--text-dark);
+}
+
+.polaroid-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.polaroid-back h3 {
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.polaroid-back p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Final Birthday Letter Section
+   -------------------------------------------------------------------------- */
+.final-letter {
+  max-width: 650px;
+  margin: 100px auto 90px auto;
+  padding: 45px 35px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.letter-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.final-letter h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 3.2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.final-letter p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.celebrate-btn {
+  margin-top: 30px;
+  padding: 14px 36px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 107, 139, 0.4);
+  transition: all 0.3s ease;
+}
+
+.celebrate-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design for Mobile Screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  header h1 { font-size: 3.5rem; }
+  
+  .timeline-container::after { left: 31px; }
+  .timeline-card { width: 100%; padding-left: 70px; padding-right: 15px; }
+  .timeline-card.right { left: 0%; }
+  .timeline-card.left { text-align: left; }
+  .timeline-card::after { left: 15px !important; }
+}
+/* --------------------------------------------------------------------------
+   Header 4-Photo Gallery Styling
+   -------------------------------------------------------------------------- */
+.header-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.header-photo-card {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(255, 107, 139, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Playful alternating tilt effect */
+.header-photo-card:nth-child(1) { transform: rotate(-5deg); }
+.header-photo-card:nth-child(2) { transform: rotate(3deg); }
+.header-photo-card:nth-child(3) { transform: rotate(-3deg); }
+.header-photo-card:nth-child(4) { transform: rotate(5deg); }
+
+/* Hover animation to bring photo forward */
+.header-photo-card:hover {
+  transform: scale(1.15) rotate(0deg);
+  z-index: 10;
+  box-shadow: 0 12px 25px rgba(255, 107, 139, 0.35);
+}
+
+.header-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Mobile Responsiveness for Header Photos */
+@media (max-width: 600px) {
+  .header-gallery {
+    gap: 10px;
+  }
+  .header-photo-card {
+    width: 75px;
+    height: 75px;
+  }
+}
+/* Ensure the front and back fit properly within the card container */
+.polaroid-card {
+  min-height: 460px; /* Expands height so long text fits without overflowing */
+}
+
+.polaroid-front img {
+  width: 100%;
+  height: 280px; /* Keeps image nicely proportioned for the taller box */
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Fix for the flipped back side text overflow */
+.polaroid-back {
+  padding: 20px 18px;
+  justify-content: flex-start; /* Aligns text from top so it doesn't get pushed out bottom */
+  overflow-y: auto; /* Adds smooth scroll if text is ever too long on mobile */
+}
+
+/* Adjust font size & spacing for long paragraphs inside back cards */
+.polaroid-back p {
+  font-size: 0.88rem; /* Slightly smaller text size so the full message fits */
+  line-height: 1.5;
+  margin-top: 8px;
+}
+.quest-section {
+  max-width: 650px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 35px 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.quest-section h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 2.8rem;
+  color: var(--primary-color);
+}
+
+.quiz-progress {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.option-btn {
+  background: #fff0f3;
+  border: 2px solid #ffd1dc;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.quiz-reward img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+/* Display photo in full aspect ratio without cropping */
+.reward-image-container img {
+  width: 100%;
+  height: auto; /* Keeps original aspect ratio */
+  max-height: 80vh; /* Ensures it fits nicely on screen */
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+}
+
+/* Download Button Styling */
+.download-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 24px;
+  background-color: var(--primary-color, #ff7b9c);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(255, 123, 156, 0.3);
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #ff527b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 82, 123, 0.4);
+}
+/* ==========================================================================
+   Interactive Gift Box Section
+   ========================================================================== */
+
+.gift-section {
+  text-align: center;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.gift-section h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 2.8rem;
+  color: var(--primary-color, #ff6b8b);
+  margin-bottom: 5px;
+}
+
+.gift-section p {
+  color: var(--text-muted, #636e72);
+  margin-bottom: 30px;
+}
+
+/* Container & Box Setup */
+.gift-container {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-top: 40px;
+  perspective: 1000px;
+}
+
+.gift-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Base Box */
+.gift-box .box {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: #ff85a1;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Base Vertical Ribbon */
+.gift-box .box .ribbon-v {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 100%;
+  background-color: #ffd166;
+}
+
+/* Gift Lid */
+.gift-box .lid {
+  position: absolute;
+  top: 30px;
+  left: -10px;
+  width: 240px;
+  height: 45px;
+  background-color: #ff6b8b;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: top left;
+}
+
+/* Lid Ribbons */
+.gift-box .lid .ribbon-v {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 100%;
+  background-color: #ffd166;
+}
+
+/* Bow on top */
+.gift-box .lid .bow {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 25px;
+  background-color: #ffd166;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.gift-box .lid .bow::before,
+.gift-box .lid .bow::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  width: 25px;
+  height: 20px;
+  border: 4px solid #ffd166;
+  border-radius: 50%;
+}
+
+.gift-box .lid .bow::before { left: -18px; transform: rotate(-20deg); }
+.gift-box .lid .bow::after { right: -18px; transform: rotate(20deg); }
+
+/* Secret Gift Content inside */
+.gift-content {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.6);
+  width: 180px;
+  text-align: center;
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gift-content img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.gift-content p {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #ff4770;
+  margin-top: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Opening Animation States (Triggered on Click)
+   -------------------------------------------------------------------------- */
+
+/* Hover hint */
+.gift-container:hover .lid {
+  transform: translateY(-5px);
+}
+
+/* Open Lid Animation */
+.gift-container.open .lid {
+  transform: translateY(-80px) rotate(-25deg);
+}
+
+/* Pop up Content Animation */
+.gift-container.open .gift-content {
+  transform: translateX(-50%) translateY(-110px) scale(1.2);
+  opacity: 1;
+  z-index: 4; /* Floats above the base box when opened */
+}
+/* ==========================================================================
+   Mobile Responsiveness & Phone Optimization
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+  
+  /* 1. Reset Global Margins & Padding for Small Screens */
+  body {
+    padding: 10px;
+    font-size: 15px;
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+  }
+
+  /* 2. Header & Banner Adjustments */
+  header {
+    padding: 20px 10px;
+  }
+
+  header h1 {
+    font-size: 2rem !important; /* Scaled down heading size */
+    line-height: 1.2;
+  }
+
+  header p {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  /* 3. Header Photo Gallery (4 Photos) */
+  .header-gallery {
+    gap: 8px;
+  }
+
+  .header-photo-card {
+    width: 70px;
+    height: 70px;
+    padding: 3px;
+  }
+
+  /* 4. Timeline & Memory Cards Layout Fix */
+  .timeline {
+    padding: 10px 0;
+  }
+
+  /* Force multi-column sections to stack in a single column */
+  .timeline-item, 
+  .memory-card,
+  .polaroid-card {
+    width: 100% !important;
+    max-width: 340px !important; /* Keeps cards centered and within mobile bounds */
+    margin: 15px auto !important;
+  }
+
+  /* Adjust flipped polaroid card heights on phone screens */
+  .polaroid-card {
+    min-height: 420px;
+  }
+
+  .polaroid-back {
+    padding: 15px;
+  }
+
+  .polaroid-back p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* 5. Interactive Gift Section */
+  .gift-container {
+    transform: scale(0.85); /* Slightly scales down 3D gift box for smaller screens */
+    margin-top: 20px;
+  }
+
+  /* 6. Quest & Trivia Quiz Module */
+  .quest-section {
+    padding: 20px 15px;
+    margin: 30px 10px;
+  }
+
+  .quest-section h2 {
+    font-size: 2rem;
+  }
+
+  .option-btn {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+
+  /* 7. Floating Audio Player Adjustment */
+  .audio-player {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 999;
+  }
+
+  #musicToggleBtn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* 8. Countdown Timer Boxes */
+  .countdown-container {
+    width: 90%;
+    padding: 15px 10px;
+  }
+
+  .timer-display {
+    gap: 10px;
+  }
+
+  .timer-display div span {
+    font-size: 1.4rem;
+  }
+
+  /* 9. Password Screen Fix for Phones */
+  .lock-screen-box {
+    width: 88%;
+    padding: 25px 15px;
+  }
+
+  .lock-screen-box input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+/* Force all images to stay visible and fit mobile screens */
+img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
