@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday! 🎂 | Memory Lane</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Audio Player -->
+  <div class="audio-player">
+    <button id="musicToggleBtn" onclick="toggleMusic()">🎵 Play Music</button>
+    <audio id="bgMusic" loop>
+      <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Password Lock Screen Overlay -->
+  <div id="lockScreen" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-icon">🔒</div>
+      <h2>Secret Entrance</h2>
+      <p>Answer our inside joke question to enter!</p>
+      <div class="hint-question">Where was your favorite go-to comfort food?</div>
+      <input type="text" id="passwordInput" placeholder="Type your answer here..." onkeypress="handleKeyPress(event)">
+      <button onclick="checkPassword()">Unlock Surprise ✨</button>
+      <div id="errorMessage" class="error-msg"></div>
+    </div>
+  </div>
+
+  <!-- Main Surprise Website Content (Hidden initially until unlocked) -->
+  <div id="mainContent" class="main-content">
+
+    <!-- Hero Header Section -->
+    <!-- Hero Header Section -->
+    <header>
+      <div class="badge">Happy Birthday!</div>
+      
+      <!-- 4 Photo Grid Container -->
+      <div class="header-gallery">
+        <div class="header-photo-card">
+          <img src="img\photo-5.jpeg" alt="Ananya photo 1">
+        </div>
+        <div class="header-photo-card">
+          <img src="img\photo-4.jpeg" alt="Ananya photo 2">
+        </div>
+        <div class="header-photo-card">
+          <img src="img\photo-3.jpeg" alt="Ananya photo 3">
+        </div>
+        <div class="header-photo-card">
+          <img src="img\photo-2.jpeg" alt="Ananya photo 4">
+        </div>
+      </div>
+
+      <h1>Happy Birthday, Ananya! 🎉</h1>
+      <p>Welcome to your personal digital museum and timeline. Here is a trip down memory lane celebrating another incredible year of you!</p>
+      <div class="scroll-hint">
+        <span>👇 Tap cards to flip them & scroll down</span>
+      </div>
+    </header>
+
+    <!-- Timeline Section -->
+    <div class="timeline-container">
+
+      <!-- Milestone 1 -->
+      <div class="timeline-card left">
+        <div class="date-tag">September 2021</div>
+        <div class="polaroid-card" onclick="this.classList.toggle('flipped')">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <img src="img\dual-image-1.jpeg" alt="Where It All Began">
+              <div class="caption">Two souls, one beautiful friendship. 🫶🌸</div>
+            </div>
+            <div class="polaroid-back">
+              <h3>Side by Side, Always</h3>
+              <p>Some friendships don’t need a thousand words—just a smile, a little madness, and someone who stays by your side through everything. 💕
+So grateful for all the laughter, silly moments, endless conversations, and memories we keep creating together. 🫶✨
+
+Here’s to us, our beautiful chaos, and a friendship that only gets better with time. 💗👭</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone 2 -->
+      <div class="timeline-card right">
+        <div class="date-tag">Summer 2022</div>
+        <div class="polaroid-card" onclick="this.classList.toggle('flipped')">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <img src="img\dual-image-2.jpeg" alt="Unforgettable Trip">
+              <div class="caption">Different hands, same heart. 🫶🏻❤️</div>
+            </div>
+            <div class="polaroid-back">
+              <h3>Hearts That Belong Together</h3>
+              <p>Some moments are just too precious to put into words. From holding hands to making little heart signs, every memory with you feels like a tiny piece of happiness I want to keep forever. 🌷✨ You’re not just my best friend—you’re one of those people who makes life feel a little warmer, brighter, and more beautiful. 💗</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone 3 -->
+      <div class="timeline-card left">
+        <div class="date-tag">December 2023</div>
+        <div class="polaroid-card" onclick="this.classList.toggle('flipped')">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <img src="img\dual-image-3.jpeg" alt="Late Night Coffee">
+              <div class="caption">Partners in Crime & Wrong Turns 🗺️🤍 ☕</div>
+            </div>
+            <div class="polaroid-back">
+              <h3>My Favorite Unpaid Job: Being Your Best Friend's Photographer 📸💛</h3>
+              <p>Being with you is never about reaching the destination—it's about everything that happens along the way. Every time we go out, you somehow convince me to click "just one more photo"... which turns into fifty. 😂 At this point, I've officially accepted my role as your personal unpaid photographer, and honestly, I wouldn't trade it for anything.
+
+The funniest part? We somehow manage to lose our way almost every single time. Maps give up on us, we laugh until our stomachs hurt, and somehow those "wrong routes" become our favorite memories.
+I'll always be your unpaid photographer... but don't expect me to stop complaining after the 100th photo. 😂📷❤️</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone 4 -->
+      <div class="timeline-card right">
+        <div class="date-tag">Today & Beyond</div>
+        <div class="polaroid-card" onclick="this.classList.toggle('flipped')">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <img src="img\dual-image-4.jpeg" alt="Celebrating You">
+              <div class="caption">Some People Just Feel Like Home 🫶🏻</div>
+            </div>
+            <div class="polaroid-back">
+              <h3>Not a daily conversation, but always a special connection. 🤍</h3>
+              <p>I absolutely love exploring little cafés and discovering new places with you. ☕🌷 Somehow, even the simplest café visit becomes a memory worth keeping when you're around. We may not chat every single day, and sometimes life gets busy, but that never changes how special you are to me.
+
+I genuinely miss you when you're not here. 🥹 And whenever I know you're coming, there's this little excitement because meeting you is simply non-negotiable. 😂💗 No matter how long it's been, the moment we meet, it feels like we just continued from where we left off.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+<!-- Trivia Mini-Game Section -->
+<div class="quest-section">
+  <h2>🎮 Friendship Quest: Unlocks Your Gift</h2>
+  <p class="quest-subtitle">Answer these 3 inside-joke questions to unlock your final surprise!</p>
+
+  <div class="trivia-container">
+    <div id="quizBox">
+      <div class="quiz-progress">Question <span id="qNum">1</span> of 3</div>
+      <h3 id="questionText">Question loading...</h3>
+      <div id="optionsContainer" class="options-grid"></div>
+    </div>
+    
+    <div id="quizReward" class="quiz-reward" style="display: none;">
+  <h3>🎉 Quest Complete!</h3>
+  <p>You proved you're my real best friend. Here is your secret photo memory!</p>
+  
+  <!-- Image Container -->
+  <div class="reward-image-container">
+    <img src="img\AI-image.png" alt="Secret Memory" id="rewardImg">
+  </div>
+
+  <!-- Download Button -->
+  <a href="img\AI-image.png" download="Ghibli_Birthday_Memory.jpg" class="download-btn">
+    📥 Download Photo
+  </a>
+</div>
+  </div>
+</div>
+<!-- Interactive Gift Box Section -->
+<div class="gift-section">
+  <h2>🎁 Unfold Your Special Surprise!</h2>
+  <p>Click on the gift box to open it!</p>
+
+  <div class="gift-container" onclick="this.classList.toggle('open')">
+    <div class="gift-box">
+      <!-- Gift Lid -->
+      <div class="lid">
+        <div class="ribbon-v"></div>
+        <div class="ribbon-h"></div>
+        <div class="bow"></div>
+      </div>
+      <!-- Gift Box Base -->
+      <div class="box">
+        <div class="ribbon-v"></div>
+      </div>
+      <!-- Secret Gift Content Inside -->
+      <div class="gift-content">
+        <img src="img\71NYYVHoV9L._AC_SL1500_.jpg" alt="Surprise Photo">
+         <img src="img\OIP-(1).jpeg" alt="Surprise Photo">
+         <img src="img\BouquetofRedRoses-1730201731210.webp" alt="Surprise Photo">
+          <img src="img\6dc8a8b529bbffb5d3f3106342819e21.jpg" alt="Surprise Photo">
+
+        <p>Happy Birthday! 💖</p>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Final Letter Section -->
+    <div class="final-letter">
+      <div class="letter-icon">💌</div>
+      <h2>To My Favorite Person</h2>
+      <p>
+        Thank you for being my go-to person, my partner in crime, and the best listener ever.
+        I hope this year brings you all the happiness, laughter, growth, and amazing opportunities you deserve!
+      </p>
+      <button class="celebrate-btn" onclick="triggerConfetti()">Burst Confetti! 🎊</button>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // 1. Password Verification
+   // Password Verification Function
+function checkPassword() {
+  const userInput = document.getElementById('passwordInput').value.toLowerCase().trim();
+  const errorMsg = document.getElementById('errorMessage');
+  
+  // Secret answer updated to brownie
+  const secretAnswer = "brownie";
+
+  if (userInput === secretAnswer) {
+    // Hide lock screen and reveal surprise content
+    document.getElementById('lockScreen').style.opacity = '0';
+    setTimeout(() => {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      triggerConfetti();
+    }, 400);
+  } else {
+    errorMsg.textContent = "Oops! Wrong answer. Think about our special spot 😉";
+    document.getElementById('passwordInput').value = "";
+  }
+}
+    function handleKeyPress(event) {
+      if (event.key === "Enter") checkPassword();
+    }
+
+    // 2. Audio Player Toggle
+    function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      const btn = document.getElementById('musicToggleBtn');
+      if (music.paused) {
+        music.play();
+        btn.textContent = "⏸️ Pause Music";
+        btn.classList.add('playing');
+      } else {
+        music.pause();
+        btn.textContent = "🎵 Play Music";
+        btn.classList.remove('playing');
+      }
+    }
+
+    // 3. Confetti Effect
+    function triggerConfetti() {
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+    }
+
+    // 4. Trivia Quiz Data & Logic
+    const quizData = [
+      {
+        question: "What is my unpaid therapy?",
+        options: ["Music", "Cricket", "Football", "travelling"],
+        correct: 1
+      },
+      {
+        question: "Which place in Kolkata would I happily visit almost every day if I could",
+        options: ["Science City", "Eco park", "Eden Garden", "Botanical Garden"],
+        correct: 2
+      },
+      {
+        question: "If we had a free day together, what would I choose?",
+        options: ["Café hopping ☕", "Exploring somewhere new 🌆", "Somehow getting lost while doing all three 😂", "Taking pictures 📸"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuiz() {
+      const current = quizData[currentQuestion];
+      document.getElementById("qNum").textContent = currentQuestion + 1;
+      document.getElementById("questionText").textContent = current.question;
+      
+      const optionsDiv = document.getElementById("optionsContainer");
+      optionsDiv.innerHTML = "";
+      
+      current.options.forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = opt;
+        btn.onclick = () => selectAnswer(index);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(selectedIndex) {
+      if (selectedIndex === quizData[currentQuestion].correct) {
+        triggerConfetti();
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuiz();
+        } else {
+          document.getElementById("quizBox").style.display = "none";
+          document.getElementById("quizReward").style.display = "block";
+        }
+      } else {
+        alert("Oops! Wrong answer, try again bestie! 😉");
+      }
+    }
+
+    // 5. Unwrap Gift Box
+    function unwrapGift() {
+      const box = document.getElementById("giftBox");
+      box.style.transform = "scale(1.5) rotate(20deg)";
+      box.style.opacity = "0";
+      setTimeout(() => {
+        box.style.display = "none";
+        document.getElementById("giftReveal").style.display = "block";
+        triggerConfetti();
+      }, 300);
+    }
+
+    // 6. Countdown Timer
+    const targetBirthday = new Date(2026, 7, 15, 0, 0, 0).getTime(); // Target Date
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetBirthday - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").style.display = "none";
+        document.getElementById("birthdayMessage").style.display = "block";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = String(days).padStart(2, '0');
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }
+
+    // Initialize quiz and timer on load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadQuiz();
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
+  </script>
+</body>
+</html>
